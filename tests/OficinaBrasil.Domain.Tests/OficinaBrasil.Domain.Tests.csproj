@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\OficinaBrasil.Domain\OficinaBrasil.Domain.csproj"/>
-		<ProjectReference Include="..\OficinaBrasil.Application\OficinaBrasil.Application.csproj"/>
-		<ProjectReference Include="..\OficinaBrasil.API\OficinaBrasil.API.csproj"/>
+		<ProjectReference Include="..\..\src\OficinaBrasil.Domain\OficinaBrasil.Domain.csproj"/>
+		<ProjectReference Include="..\..\src\OficinaBrasil.Application\OficinaBrasil.Application.csproj"/>
+		<ProjectReference Include="..\..\src\OficinaBrasil.API\OficinaBrasil.API.csproj"/>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11"/>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
 		<PackageReference Include="xunit" Version="2.9.2"/>

@@ -37,26 +37,26 @@ Este é o README principal do projeto. Os guias específicos ficam em `docs`.
 ## Organização
 
 ```text
-OficinaBrasil.API/              Controllers, autenticação e serviços de execução
-OficinaBrasil.Application/      Casos de uso, DTOs e interfaces
-OficinaBrasil.Domain/           Entidades, objetos de valor e regras de negócio
-OficinaBrasil.Infrastructure/   Persistência e repositórios
-OficinaBrasil.Domain.Tests/     Testes unitários e de integração
+src/OficinaBrasil.API/                  Controllers, autenticação e serviços de execução
+src/OficinaBrasil.Application/          Casos de uso, DTOs e interfaces
+src/OficinaBrasil.Domain/               Entidades, objetos de valor e regras de negócio
+src/OficinaBrasil.Infrastructure/       Persistência e repositórios
+tests/OficinaBrasil.Domain.Tests/       Testes unitários e de integração
 database/                      SQL para atualização de bancos existentes
 docs/                          Modelagem, guias, Postman e evidências
 scripts/                       Verificação de cobertura e auditoria NuGet
-.github/workflows/             Integração contínua
+.github/workflows/                      Integração contínua
 ```
 
 As pastas locais `tmp`, `.artifacts`, `.vs`, `bin` e `obj` são ignoradas pelo Git. Não fazem parte da entrega. Os scripts são usados tanto localmente quanto pelo workflow de qualidade.
 
-- `OficinaBrasil.API/Controllers`: um controller por recurso; `AuthController` para funcionários.
-- `OficinaBrasil.Application/UseCases`: casos de uso separados por funcionalidade.
-- `OficinaBrasil.Application/DTOs`: contratos de entrada da API.
-- `OficinaBrasil.Application/Interfaces`: contratos de persistência da aplicação.
-- `OficinaBrasil.Domain/Entities`: uma entidade por arquivo; `Enums`, `Exceptions` e `Validation`.
-- `OficinaBrasil.Infrastructure/Repositories`: repositórios individuais; `Persistence` contém o DbContext e consultas compostas.
-- `OficinaBrasil.Domain.Tests`: testes unitários e de integração HTTP com MySQL real e SMTP local capturado.
+- `src/OficinaBrasil.API/Controllers`: um controller por recurso; `AuthController` para funcionários.
+- `src/OficinaBrasil.Application/UseCases`: casos de uso separados por funcionalidade.
+- `src/OficinaBrasil.Application/DTOs`: contratos de entrada da API.
+- `src/OficinaBrasil.Application/Interfaces`: contratos de persistência da aplicação.
+- `src/OficinaBrasil.Domain/Entities`: uma entidade por arquivo; `Enums`, `Exceptions` e `Validation`.
+- `src/OficinaBrasil.Infrastructure/Repositories`: repositórios individuais; `Persistence` contém o DbContext e consultas compostas.
+- `tests/OficinaBrasil.Domain.Tests`: testes unitários e de integração HTTP com MySQL real e SMTP local capturado.
 
 **Fluxo:** HTTP → Controller → UseCase → entidades/regras de domínio → contrato de repositório → implementação EF Core → MySQL.
 
@@ -82,12 +82,12 @@ Nesse modo, os e-mails ficam disponíveis em `http://localhost:8025`. Para encer
 
 ### Com .NET e MySQL locais
 
-Para popular o banco com dados de demonstração e testar o fluxo completo, consulte [docs/DEMO.md](docs/DEMO.md). Com o MySQL configurado, execute `dotnet run --project OficinaBrasil.API -- --seed-demo`.
+Para popular o banco com dados de demonstração e testar o fluxo completo, consulte [docs/DEMO.md](docs/DEMO.md). Com o MySQL configurado, execute `dotnet run --project src/OficinaBrasil.API -- --seed-demo`.
 
 1. Tenha .NET 8 SDK e MySQL 8 disponíveis.
-2. Configure `OficinaBrasil.API/appsettings.Development.json` ou variáveis `ConnectionStrings__MySql`, `Jwt__Key`, `SeedAdmin__Email` e `SeedAdmin__Password`.
+2. Configure `src/OficinaBrasil.API/appsettings.Development.json` ou variáveis `ConnectionStrings__MySql`, `Jwt__Key`, `SeedAdmin__Email` e `SeedAdmin__Password`.
 3. `dotnet restore OficinaBrasil.sln` e `dotnet build OficinaBrasil.sln`.
-4. `dotnet run --project OficinaBrasil.API` (ou `docker compose up --build`).
+4. `dotnet run --project src/OficinaBrasil.API` (ou `docker compose up --build`).
 5. Swagger no endereço fornecido pelo host em ambiente Development.
 
 O banco é criado via `EnsureCreated`, somente para facilitar o MVP. Para ambientes reais, substitua por migrations do EF Core.

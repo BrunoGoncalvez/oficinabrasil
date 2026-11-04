@@ -7,7 +7,7 @@ Dados fictícios com nomes, preços e cenários plausíveis. Os CPFs têm dígit
 Pare a execução da API antes do build. No terminal da pasta da solução:
 
 ```powershell
-dotnet run --project OficinaBrasil.API -- --seed-demo
+dotnet run --project src/OficinaBrasil.API -- --seed-demo
 ```
 
 O perfil de execução já define `Development`. O comando cria o banco quando necessário, adiciona a tabela de orçamentos caso ela ainda não exista, grava a massa em transação e encerra. Depois, inicie a API normalmente. A seed é exclusiva de Development, não apaga dados, não altera senhas de usuários existentes e não roda automaticamente a cada inicialização. Repetir o comando preserva a massa e as decisões já realizadas. Para recomeçar do zero, use outro banco de desenvolvimento.
@@ -89,7 +89,7 @@ $env:Smtp__Port = '1025'
 $env:Smtp__EnableSsl = 'false'
 $env:Smtp__From = 'oficina@example.test'
 $env:Estimates__PublicBaseUrl = 'https://localhost:65371'
-dotnet run --project OficinaBrasil.API
+dotnet run --project src/OficinaBrasil.API
 ```
 
 Abra [a caixa local](http://localhost:8025). O worker busca mensagens a cada 30 segundos. Os e-mails de teste ficam capturados no Mailpit. Use a porta efetiva da API em `Estimates__PublicBaseUrl` se ela for diferente no seu ambiente.

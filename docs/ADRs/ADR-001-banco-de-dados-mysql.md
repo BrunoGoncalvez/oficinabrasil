@@ -68,9 +68,9 @@ Reavaliar a decisão se houver requisito de infraestrutura que imponha outro ban
 
 ## Evidências na implementação
 
-- [Configuração do EF Core e do provedor MySQL](../../OficinaBrasil.API/Program.cs).
-- [Mapeamentos, índices e tokens de concorrência](../../OficinaBrasil.Infrastructure/Persistence/WorkshopDbContext.cs).
-- [Dependências de persistência](../../OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj).
+- [Configuração do EF Core e do provedor MySQL](../../src/OficinaBrasil.API/Program.cs).
+- [Mapeamentos, índices e tokens de concorrência](../../src/OficinaBrasil.Infrastructure/Persistence/WorkshopDbContext.cs).
+- [Dependências de persistência](../../src/OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj).
 - [Ambiente Docker e volume do banco](../../docker-compose.yml).
 - [SQL para bancos existentes](../../database/001_estimates.sql).
 - [Testes e evidências de cobertura](../evidencias/cobertura.md).

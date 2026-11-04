@@ -1,10 +1,10 @@
-﻿param([double]$MinimumCoverage = 80)
+param([double]$MinimumCoverage = 80)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Push-Location $projectRoot
 try {
     $runDirectory = Join-Path $projectRoot ('.artifacts/tests/' + [Guid]::NewGuid().ToString('N'))
-    dotnet test OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj -m:1 -nr:false --collect:'XPlat Code Coverage' --results-directory $runDirectory --logger 'trx;LogFileName=resultados.trx' --verbosity minimal
+    dotnet test tests/OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj -m:1 -nr:false --collect:'XPlat Code Coverage' --results-directory $runDirectory --logger 'trx;LogFileName=resultados.trx' --verbosity minimal
     if ($LASTEXITCODE -ne 0) { throw 'Falha nos testes. Consulte os resultados acima.' }
     $report = Get-ChildItem -LiteralPath $runDirectory -Recurse -Filter coverage.cobertura.xml | Select-Object -First 1
     if (!$report) { throw 'Relatório de cobertura não encontrado.' }

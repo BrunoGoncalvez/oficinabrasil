@@ -80,9 +80,9 @@ Reavaliar a stack ou decomposição se surgirem necessidades comprovadas de esca
 
 ## Evidências na implementação
 
-- [Composição da aplicação, JWT, Swagger e worker](../../OficinaBrasil.API/Program.cs).
-- [Dependências da API](../../OficinaBrasil.API/OficinaBrasil.API.csproj).
-- [Dependências e ferramentas de teste](../../OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj).
+- [Composição da aplicação, JWT, Swagger e worker](../../src/OficinaBrasil.API/Program.cs).
+- [Dependências da API](../../src/OficinaBrasil.API/OficinaBrasil.API.csproj).
+- [Dependências e ferramentas de teste](../../tests/OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj).
 - [Modelagem e limites dos contextos](../ddd/README.md).
 - [Docker Compose](../../docker-compose.yml) e [Mailpit de demonstração](../../docker-compose.demo.yml).
 - [Workflow de qualidade](../../.github/workflows/quality.yml).

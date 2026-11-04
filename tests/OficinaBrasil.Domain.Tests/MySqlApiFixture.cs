@@ -24,9 +24,9 @@ public class MySqlApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
         var source = Environment.GetEnvironmentVariable("OFICINA_TEST_MYSQL");
         if (string.IsNullOrWhiteSpace(source))
         {
-            var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../"));
-            source = new ConfigurationBuilder().AddJsonFile(Path.Combine(root, "OficinaBrasil.API", "appsettings.json"))
-                .AddJsonFile(Path.Combine(root, "OficinaBrasil.API", "appsettings.Development.json"), optional: true)
+            var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../../"));
+            source = new ConfigurationBuilder().AddJsonFile(Path.Combine(root, "src", "OficinaBrasil.API", "appsettings.json"))
+                .AddJsonFile(Path.Combine(root, "src", "OficinaBrasil.API", "appsettings.Development.json"), optional: true)
                 .Build().GetConnectionString("MySql");
         }
         var connection = new MySqlConnectionStringBuilder(source ?? throw new InvalidOperationException("Configure OFICINA_TEST_MYSQL")) { Database = database };

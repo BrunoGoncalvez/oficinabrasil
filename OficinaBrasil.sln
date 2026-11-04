@@ -2,15 +2,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Domain", "OficinaBrasil.Domain\OficinaBrasil.Domain.csproj", "{7E9A6D23-BD38-5E5F-8E41-413DF27C4EAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Domain", "src\OficinaBrasil.Domain\OficinaBrasil.Domain.csproj", "{7E9A6D23-BD38-5E5F-8E41-413DF27C4EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Application", "OficinaBrasil.Application\OficinaBrasil.Application.csproj", "{2B608912-E84A-50A2-AAEE-8EE8EC162252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Application", "src\OficinaBrasil.Application\OficinaBrasil.Application.csproj", "{2B608912-E84A-50A2-AAEE-8EE8EC162252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Infrastructure", "OficinaBrasil.Infrastructure\OficinaBrasil.Infrastructure.csproj", "{4BE8F495-E7A7-5855-9B0F-392A0995A9CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Infrastructure", "src\OficinaBrasil.Infrastructure\OficinaBrasil.Infrastructure.csproj", "{4BE8F495-E7A7-5855-9B0F-392A0995A9CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.API", "OficinaBrasil.API\OficinaBrasil.API.csproj", "{4830D0C9-664C-5CD8-AF7B-E5116A80985B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.API", "src\OficinaBrasil.API\OficinaBrasil.API.csproj", "{4830D0C9-664C-5CD8-AF7B-E5116A80985B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Domain.Tests", "OficinaBrasil.Domain.Tests\OficinaBrasil.Domain.Tests.csproj", "{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OficinaBrasil.Domain.Tests", "tests\OficinaBrasil.Domain.Tests\OficinaBrasil.Domain.Tests.csproj", "{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B20A1904-CDEE-466E-B51D-596AD4E9945C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{51607146-B6B4-4CC8-98BB-F581C1BDC773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,5 +42,12 @@ Global
 		{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E9A6D23-BD38-5E5F-8E41-413DF27C4EAA} = {B20A1904-CDEE-466E-B51D-596AD4E9945C}
+		{2B608912-E84A-50A2-AAEE-8EE8EC162252} = {B20A1904-CDEE-466E-B51D-596AD4E9945C}
+		{4BE8F495-E7A7-5855-9B0F-392A0995A9CC} = {B20A1904-CDEE-466E-B51D-596AD4E9945C}
+		{4830D0C9-664C-5CD8-AF7B-E5116A80985B} = {B20A1904-CDEE-466E-B51D-596AD4E9945C}
+		{781EC7F0-23A8-57B6-9A2E-F56CF3CE5CA3} = {51607146-B6B4-4CC8-98BB-F581C1BDC773}
 	EndGlobalSection
 EndGlobal

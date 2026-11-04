@@ -110,9 +110,9 @@ Para replicar, organize controllers no topo, casos de uso no meio e domínio e p
 
 ## Referências do projeto
 
-- [Composição e configuração da API](../../OficinaBrasil.API/Program.cs).
-- [Contrato de persistência](../../OficinaBrasil.Application/Interfaces/IWorkshopData.cs).
-- [Worker de e-mail](../../OficinaBrasil.API/Services/EstimateEmailWorker.cs).
+- [Composição e configuração da API](../../src/OficinaBrasil.API/Program.cs).
+- [Contrato de persistência](../../src/OficinaBrasil.Application/Interfaces/IWorkshopData.cs).
+- [Worker de e-mail](../../src/OficinaBrasil.API/Services/EstimateEmailWorker.cs).
 - [Modelo DDD](../ddd/README.md), [requisitos](../REQUISITOS.md) e [ADRs](../ADRs/README.md).
 
 O arquivo fornecido foi conferido quanto à estrutura XML e à presença das três abas. Para uma visualização sem editor, exporte um PDF com a opção de todas as páginas e confira as três páginas antes de publicar.
