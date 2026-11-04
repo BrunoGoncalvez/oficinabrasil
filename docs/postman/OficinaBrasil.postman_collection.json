@@ -1,0 +1,1269 @@
+{
+  "info": {
+    "name": "OficinaBrasil | API completa",
+    "description": "Documentação dos 35 endpoints dos 8 controllers (100% das rotas HTTP de negócio). Configure baseUrl, email e password nas variáveis da coleção. Execute o login primeiro. JWT e IDs são capturados automaticamente após sucesso. Utilize administrador para percorrer todos os módulos; cada requisição informa os papéis aceitos. Os enums de entrada são numéricos. Execute manualmente conforme docs/postman/README.md: a coleção contém caminhos alternativos e exclusões e não representa uma execução linear no Runner. Exemplos criam dados fictícios; documento, placa, SKU e e-mail devem ser únicos. Tokens e credenciais ficam vazios no arquivo distribuído.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:65372",
+      "type": "string"
+    },
+    {
+      "key": "email",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customerId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "vehicleId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "serviceId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "partId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "orderId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "estimateId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "trackingToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "estimateToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customerDocument",
+      "value": "52998224725",
+      "type": "string"
+    },
+    {
+      "key": "vehiclePlate",
+      "value": "PST1A23",
+      "type": "string"
+    },
+    {
+      "key": "partSku",
+      "value": "POSTMAN-FILTRO-001",
+      "type": "string"
+    },
+    {
+      "key": "employeeEmail",
+      "value": "funcionario.postman@example.test",
+      "type": "string"
+    },
+    {
+      "key": "employeePassword",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "approve",
+      "value": "true",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 | Autenticação e funcionários",
+      "description": "Login primeiro. JWT válido por 2 horas. Papéis: 0 Atendente, 1 Mecanico, 2 Estoquista, 3 Administrador.",
+      "item": [
+        {
+          "name": "Login e salvar JWT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "description": "Público. Configure email/password de um usuário ativo. Retorna accessToken e o salva na coleção.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });",
+                  "if (pm.response.code === 200) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.accessToken) pm.collectionVariables.set(\"accessToken\", data.accessToken);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Cadastrar funcionário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/employees",
+            "description": "Papel: Administrador. Senha com pelo menos 8 caracteres; e-mail único. role: 0 Atendente, 1 Mecanico, 2 Estoquista, 3 Administrador. Configure employeePassword.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Funcionário Postman\",\n  \"email\": \"{{employeeEmail}}\",\n  \"password\": \"{{employeePassword}}\",\n  \"role\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 | Clientes",
+      "description": "Atendente, Administrador",
+      "item": [
+        {
+          "name": "Criar e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/customers",
+            "description": "Papéis: Atendente, Administrador. Cria um cadastro e salva customerId.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Postman\",\n  \"document\": \"{{customerDocument}}\",\n  \"email\": \"cliente.postman@example.test\",\n  \"phone\": \"11999990000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"customerId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/customers",
+            "description": "Papéis: Atendente, Administrador. Retorna a lista sem paginação.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/customers/{{customerId}}",
+            "description": "Papéis: Atendente, Administrador. Preencha customerId ou execute o cadastro.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar por CPF/CNPJ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/customers/by-document?document={{customerDocument}}",
+            "description": "Papéis: Atendente, Administrador. CPF/CNPJ com dígitos verificadores válidos; aceita pontuação.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/customers/{{customerId}}",
+            "description": "Papéis: Atendente, Administrador. Envia todos os campos do cadastro.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cliente Postman\",\n  \"document\": \"{{customerDocument}}\",\n  \"email\": \"cliente.postman@example.test\",\n  \"phone\": \"11999990000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 | Veículos",
+      "description": "Atendente, Administrador",
+      "item": [
+        {
+          "name": "Criar e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/vehicles",
+            "description": "Papéis: Atendente, Administrador. Cria um cadastro e salva vehicleId.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"{{customerId}}\",\n  \"plate\": \"{{vehiclePlate}}\",\n  \"brand\": \"Fiat\",\n  \"model\": \"Argo\",\n  \"year\": 2024\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"vehicleId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicles",
+            "description": "Papéis: Atendente, Administrador. Retorna a lista sem paginação.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+            "description": "Papéis: Atendente, Administrador. Preencha vehicleId ou execute o cadastro.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+            "description": "Papéis: Atendente, Administrador. Envia todos os campos do cadastro.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"{{customerId}}\",\n  \"plate\": \"{{vehiclePlate}}\",\n  \"brand\": \"Fiat\",\n  \"model\": \"Argo\",\n  \"year\": 2024\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 | Serviços",
+      "description": "Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador",
+      "item": [
+        {
+          "name": "Criar e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/services",
+            "description": "Papéis: Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador. Cria um cadastro e salva serviceId.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Troca de filtro Postman\",\n  \"description\": \"Mão de obra para substituição do filtro\",\n  \"price\": 90.0,\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"serviceId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/services",
+            "description": "Papéis: Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador. Retorna a lista sem paginação.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/services/{{serviceId}}",
+            "description": "Papéis: Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador. Preencha serviceId ou execute o cadastro.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/services/{{serviceId}}",
+            "description": "Papéis: Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador. Envia todos os campos do cadastro.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Troca de filtro Postman\",\n  \"description\": \"Mão de obra para substituição do filtro\",\n  \"price\": 90.0,\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 | Peças e estoque",
+      "description": "Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador",
+      "item": [
+        {
+          "name": "Criar e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/parts",
+            "description": "Papéis: Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador. Cria um cadastro e salva partId.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Filtro Postman\",\n  \"sku\": \"{{partSku}}\",\n  \"description\": \"Filtro para demonstração\",\n  \"unitPrice\": 45.5,\n  \"quantity\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"partId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/parts",
+            "description": "Papéis: Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador. Retorna a lista sem paginação.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/parts/{{partId}}",
+            "description": "Papéis: Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador. Preencha partId ou execute o cadastro.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/parts/{{partId}}",
+            "description": "Papéis: Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador. Envia todos os campos do cadastro. quantity não altera estoque nesta rota; utilize a movimentação.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Filtro Postman\",\n  \"sku\": \"{{partSku}}\",\n  \"description\": \"Filtro para demonstração\",\n  \"unitPrice\": 45.5,\n  \"quantity\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Entrada de estoque",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/parts/{{partId}}/stock",
+            "description": "Papéis: Estoquista, Administrador. delta positivo adiciona, negativo retira. Não permite zero nem saldo negativo.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delta\": 5,\n  \"reason\": \"Reposição de demonstração\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 | Ordens de serviço",
+      "description": "Crie cliente e veículo antes de abrir a OS. Para o orçamento, crie serviço e peça. O administrador pode executar todas as operações.",
+      "item": [
+        {
+          "name": "Abrir OS e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders",
+            "description": "Papéis: Atendente, Administrador. Abre em RECEBIDA. Itens vazios são permitidos nesta etapa.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicleId\": \"{{vehicleId}}\",\n  \"notes\": \"Cliente relata necessidade de revisão\",\n  \"services\": [],\n  \"parts\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"orderId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Listar OS",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders",
+            "description": "Papéis: Atendente, Mecanico, Administrador.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Consultar OS e orçamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}",
+            "description": "Papéis: Atendente, Mecanico, Administrador. Inclui estimate e emailSentAt, mas não o token de decisão.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Iniciar diagnóstico",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status",
+            "description": "Partindo de RECEBIDA. Papéis: Mecanico, Administrador. Enum: 0 RECEBIDA, 1 EM_DIAGNOSTICO, 2 AGUARDANDO_APROVACAO, 3 EM_EXECUCAO, 4 FINALIZADA, 5 ENTREGUE, 6 APROVADA, 7 CANCELADA. Estados 2 e 6 são definidos pelo fluxo de orçamento, não por PATCH.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Iniciar execução",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status",
+            "description": "Exige APROVADA pelo cliente e estoque suficiente; realiza baixa de peças. Papéis: Mecanico, Administrador. Enum: 0 RECEBIDA, 1 EM_DIAGNOSTICO, 2 AGUARDANDO_APROVACAO, 3 EM_EXECUCAO, 4 FINALIZADA, 5 ENTREGUE, 6 APROVADA, 7 CANCELADA. Estados 2 e 6 são definidos pelo fluxo de orçamento, não por PATCH.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Finalizar execução",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status",
+            "description": "Exige EM_EXECUCAO. Papéis: Mecanico, Administrador. Enum: 0 RECEBIDA, 1 EM_DIAGNOSTICO, 2 AGUARDANDO_APROVACAO, 3 EM_EXECUCAO, 4 FINALIZADA, 5 ENTREGUE, 6 APROVADA, 7 CANCELADA. Estados 2 e 6 são definidos pelo fluxo de orçamento, não por PATCH.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Registrar entrega",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/status",
+            "description": "Exige FINALIZADA. Papéis: Atendente, Administrador. Enum: 0 RECEBIDA, 1 EM_DIAGNOSTICO, 2 AGUARDANDO_APROVACAO, 3 EM_EXECUCAO, 4 FINALIZADA, 5 ENTREGUE, 6 APROVADA, 7 CANCELADA. Estados 2 e 6 são definidos pelo fluxo de orçamento, não por PATCH.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Média de horas de execução",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/metrics/average-execution-hours",
+            "description": "Papéis: Atendente, Administrador. Retorna count e averageHours das OS com início e fim registrados.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Gerar link de acompanhamento",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/tracking-link",
+            "description": "Papéis: Atendente, Administrador. Salva trackingToken; retorna token, path e expiresInDays (30).\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });",
+                  "if (pm.response.code === 200) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.token) pm.collectionVariables.set(\"trackingToken\", data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 | Orçamentos e decisão do cliente",
+      "description": "Criar orçamento durante EM_DIAGNOSTICO. A aprovação/reprovação depende do token recebido por e-mail. Não execute aprovação e reprovação para o mesmo orçamento.",
+      "item": [
+        {
+          "name": "Criar orçamento e salvar ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/estimate",
+            "description": "Papéis: Mecanico, Administrador. Substitui itens preliminares, calcula preços no servidor, muda para AGUARDANDO_APROVACAO e enfileira e-mail. Configure SMTP. O token não é retornado pela API.\n\nSucesso esperado: 201. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Filtro desgastado; necessária substituição\",\n  \"services\": [\n    {\n      \"serviceId\": \"{{serviceId}}\"\n    }\n  ],\n  \"parts\": [\n    {\n      \"partId\": \"{{partId}}\",\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 201\", function () { pm.response.to.have.status(201); });",
+                  "if (pm.response.code === 201) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"estimateId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Reemitir orçamento pendente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/orders/{{orderId}}/estimate/reissue",
+            "description": "Papéis: Atendente, Mecanico, Administrador. Opcional: renova orçamento não respondido, preserva valores e revoga token anterior. Copie o novo token do novo e-mail.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });",
+                  "if (pm.response.code === 200) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.id) pm.collectionVariables.set(\"estimateId\", data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Visualizar confirmação de decisão",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/estimates/{{estimateId}}/decision?token={{estimateToken}}&approve={{approve}}",
+            "description": "Público, com token específico. Copie estimateToken do link enviado por e-mail. approve deve ser true ou false. Retorna HTML com formulário; GET não registra decisão.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Confirmar aprovação ou reprovação",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": "{{baseUrl}}/api/estimates/{{estimateId}}/decision",
+            "description": "Público, com token específico. approve=true aprova, false reprova/cancela a OS. Retorna texto. Envio é formulário URL encoded, não JSON. Token expirado/inválido/já usado não muda a OS.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "token",
+                  "value": "{{estimateToken}}",
+                  "type": "text"
+                },
+                {
+                  "key": "approve",
+                  "value": "{{approve}}",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 | Acompanhamento público",
+      "description": "Token específico da OS, separado do JWT e do token de decisão.",
+      "item": [
+        {
+          "name": "Consultar andamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/tracking/{{orderId}}?token={{trackingToken}}",
+            "description": "Público. Gere o link no módulo de OS antes. Retorna status e datas sem dados pessoais. Token inválido retorna 404.\n\nSucesso esperado: 200. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 200\", function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 | Exclusões (opcionais)",
+      "description": "Execute manualmente, apenas em dados descartáveis. Recursos vinculados a OS podem retornar 409 por chave estrangeira. Exclua veículo antes de cliente.",
+      "item": [
+        {
+          "name": "Excluir clientes",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/customers/{{customerId}}",
+            "description": "Papéis: Atendente, Administrador. Remove o recurso identificado pela variável customerId.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Excluir veículos",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+            "description": "Papéis: Atendente, Administrador. Remove o recurso identificado pela variável vehicleId.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Excluir serviços",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/services/{{serviceId}}",
+            "description": "Papéis: Leitura: Atendente, Mecanico, Administrador. Escrita: Atendente, Administrador. Remove o recurso identificado pela variável serviceId.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Excluir peças",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/parts/{{partId}}",
+            "description": "Papéis: Leitura: Estoquista, Mecanico, Administrador. Escrita: Estoquista, Administrador. Remove o recurso identificado pela variável partId.\n\nSucesso esperado: 204. Erros comuns: 400 (validação/regra), 401 (JWT ausente/expirado), 403 (papel sem acesso), 404 (recurso/token não encontrado), 409 (conflito de persistência/concorrência). Consulte o corpo da resposta."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status esperado: 204\", function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ]
+}

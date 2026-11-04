@@ -1,0 +1,19 @@
+**/bin/
+**/obj/
+.vs/
+*.user
+.env
+tmp/
+.artifacts/
+TestResults/
+
+# Configura??es privadas e credenciais locais
+.env.*
+!.env.example
+**/appsettings.Local.json
+**/appsettings.*.local.json
+*.pfx
+*.p12
+*.pem
+*.key
+**/keys/

@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_dev_only
+      MYSQL_DATABASE: oficinabrasil
+      MYSQL_USER: oficina
+      MYSQL_PASSWORD: oficina_dev_only
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot_dev_only"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  api:
+    build:
+      context: .
+      dockerfile: OficinaBrasil.API/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__MySql: Server=mysql;Port=3306;Database=oficinabrasil;User=oficina;Password=oficina_dev_only;
+      SeedAdmin__Email: admin@oficina.local
+      SeedAdmin__Password: altere_esta_senha_admin
+      Jwt__Key: TROQUE_ESTA_CHAVE_DE_DESENVOLVIMENTO_ANTES_DE_PUBLICAR_123456
+      DataProtection__KeysPath: /app/keys
+    volumes:
+      - api_keys:/app/keys
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+volumes:
+  mysql_data:
+  api_keys:

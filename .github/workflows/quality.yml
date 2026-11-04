@@ -1,0 +1,39 @@
+name: Qualidade
+on:
+  push:
+  pull_request:
+jobs:
+  tests-and-audit:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: integration_only
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -pintegration_only"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    env:
+      OFICINA_TEST_MYSQL: Server=127.0.0.1;Port=3306;User=root;Password=integration_only;
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore OficinaBrasil.sln
+      - run: dotnet build OficinaBrasil.sln --no-restore
+      - shell: pwsh
+        run: ./scripts/verify.ps1
+      - shell: pwsh
+        run: ./scripts/security.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidencias-qualidade
+          path: |
+            docs/evidencias/
+            .artifacts/tests/

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json",
+    "C:/Program Files (x86)/Microsoft SDKs/NuGetPackages/"
+  ],
+  "projects": [
+    {
+      "path": "PROJECT/OficinaBrasil.Domain/OficinaBrasil.Domain.csproj"
+    },
+    {
+      "path": "PROJECT/OficinaBrasil.Application/OficinaBrasil.Application.csproj"
+    },
+    {
+      "path": "PROJECT/OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj"
+    },
+    {
+      "path": "PROJECT/OficinaBrasil.API/OficinaBrasil.API.csproj"
+    },
+    {
+      "path": "PROJECT/OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj"
+    }
+  ]
+}
