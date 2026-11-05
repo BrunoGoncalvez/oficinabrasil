@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
+		<Content Update="appsettings.Local.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" />
 		<EmbeddedResource Include="..\..\database\001_estimates.sql" LogicalName="Demo.Estimates.sql" />
 		<ProjectReference Include="..\OficinaBrasil.Infrastructure\OficinaBrasil.Infrastructure.csproj"/>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>

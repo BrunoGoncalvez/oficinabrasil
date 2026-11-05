@@ -7,6 +7,11 @@ using OficinaBrasil.Application;
 using OficinaBrasil.Infrastructure;
 using OficinaBrasil.Domain;
 var builder = WebApplication.CreateBuilder(args);
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables().AddCommandLine(args);
+}
 var conn = builder.Configuration.GetConnectionString("MySql") ?? throw new Exception("Configure ConnectionStrings:MySql");
 if (string.IsNullOrWhiteSpace(conn)) throw new Exception("Configure ConnectionStrings:MySql");
 builder.Services.AddDbContext<WorkshopDbContext>(o => o.UseMySql(conn, ServerVersion.Parse("8.0.36-mysql")));

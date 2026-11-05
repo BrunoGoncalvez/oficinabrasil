@@ -85,10 +85,22 @@ Nesse modo, os e-mails ficam disponíveis em `http://localhost:8025`. Para encer
 Para popular o banco com dados de demonstração e testar o fluxo completo, consulte [docs/DEMO.md](docs/DEMO.md). Com o MySQL configurado, execute `dotnet run --project src/OficinaBrasil.API -- --seed-demo`.
 
 1. Tenha .NET 8 SDK e MySQL 8 disponíveis.
-2. Configure `src/OficinaBrasil.API/appsettings.Development.json` ou variáveis `ConnectionStrings__MySql`, `Jwt__Key`, `SeedAdmin__Email` e `SeedAdmin__Password`.
+2. Configure as variáveis `ConnectionStrings__MySql`, `Jwt__Key`, `SeedAdmin__Email` e `SeedAdmin__Password`, ou crie `src/OficinaBrasil.API/appsettings.Local.json` para suas configurações privadas. Esse arquivo é carregado somente em Development, ignorado pelo Git e excluído da publicação. Variáveis de ambiente e argumentos de linha de comando têm prioridade sobre ele.
 3. `dotnet restore OficinaBrasil.sln` e `dotnet build OficinaBrasil.sln`.
 4. `dotnet run --project src/OficinaBrasil.API` (ou `docker compose up --build`).
 5. Swagger no endereço fornecido pelo host em ambiente Development.
+
+Exemplo de estrutura do arquivo privado (preencha os valores antes de executar):
+
+```json
+{
+  "ConnectionStrings": { "MySql": "SUA_CONEXAO_MYSQL" },
+  "Jwt": { "Key": "SUA_CHAVE_ALEATORIA_COM_PELO_MENOS_32_BYTES" },
+  "SeedAdmin": { "Email": "admin@oficina.local", "Password": "SUA_SENHA_INICIAL" }
+}
+```
+
+O MySQL do Compose está disponível em `localhost:3307`; para iniciá-lo separadamente, execute `docker compose up -d mysql`. Se estiver usando MySQL instalado na máquina, informe a porta e as credenciais dessa instalação. O administrador inicial é criado somente quando ainda não há usuários no banco.
 
 O banco é criado via `EnsureCreated`, somente para facilitar o MVP. Para ambientes reais, substitua por migrations do EF Core.
 
