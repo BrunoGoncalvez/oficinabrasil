@@ -44,7 +44,7 @@ Esse diagrama descreve o processo de negócio descoberto. A implementação atua
 
 ## Relação com os demais documentos
 
-O Domain Storytelling apresenta quem realiza as atividades e quais objetos participam. O [Event Storming](../README.md#event-storming-e-exportações) complementa essas histórias com comandos, eventos, políticas e estados. Os termos do domínio estão no [glossário de linguagem ubíqua](../linguagem-ubiqua.md).
+O Domain Storytelling apresenta quem realiza as atividades e quais objetos participam. O [Event Storming](../README.md#event-storming) complementa essas histórias com comandos, eventos, políticas e estados. Os termos do domínio estão no [glossário de linguagem ubíqua](../linguagem-ubiqua.md).
 
 As imagens foram preservadas como recebidas, incluindo o título genérico `<title>` no fluxo mecânico e o ator adicional sem conexões no fluxo de estoque. Os títulos e descrições desta página identificam cada história.
 

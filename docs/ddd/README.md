@@ -14,20 +14,11 @@ Os [diagramas originais de Domain Storytelling](storytelling/README.md) apresent
 
 A página de Storytelling explica a relação entre as histórias e o código, incluindo as atividades de reserva e entrega física de peças que não possuem operação própria na aplicação. Foi incluída uma versão SVG por história, sem repetir as exportações PNG.
 
-## Event Storming e exportações
+## Event Storming
 
-O [levantamento original de Event Storming](event-storming/README.md) está sendo organizado a partir dos recortes enviados: brainstorming, linha do tempo, comandos e políticas e agregados. Essa página registra a sequência, as sobreposições, os pontos em aberto da descoberta e sua relação com a implementação.
+O Event Storming organiza o atendimento da oficina em eventos de negócio, comandos, políticas e agregados. O fluxo abrange cadastro de cliente e veículo, abertura da OS, diagnóstico, orçamento, decisão do cliente, disponibilidade de peças, execução e entrega.
 
-As imagens abaixo são versões locais do modelo implementado, mantidas no repositório para leitura sem acesso ao Miro. Azul indica comando; laranja, evento/resultado; amarelo, ator; roxo, política.
-
-- [Criação da OS e orçamento](criacao-os.svg)
-- [Acompanhamento, execução e entrega](acompanhamento-os.svg)
-- [Peças, insumos e estoque](estoque.svg)
-- [Arquitetura e relacionamentos](diagramas.svg)
-
-![Criação e orçamento](criacao-os.svg)
-![Acompanhamento](acompanhamento-os.svg)
-![Estoque](estoque.svg)
+Consulte o [quadro de Event Storming no Miro](https://miro.com/app/board/uXjVGE0G3xk=/) e a [síntese do fluxo e das regras de negócio](event-storming/README.md).
 
 ## Contextos e agregados
 
