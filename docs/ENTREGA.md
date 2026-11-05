@@ -30,6 +30,7 @@ Confirmar se a lista de integrantes está completa. Repositório GitHub e vídeo
 | Cobertura mínima dos domínios críticos | [Relatório](evidencias/cobertura.md) e XML bruto na mesma pasta |
 | Testes de integração | ApiIntegrationTests: HTTP + JWT + EF + MySQL real; SMTP local capturado |
 | Vulnerabilidades de dependências | [Relatório](evidencias/seguranca.md) e JSON bruto |
+| Análise do código com SonarQube | [Resultado e JSONs](evidencias/sonar.md), [avaliação dos achados](evidencias/sonar-achados.md) e [reprodução local](SONAR.md) |
 | Docker e execução local | Dockerfile, compose, [README](../README.md) e [build Linux verificado](evidencias/build.md) |
 | DDD e exportações locais | [Documentação](ddd/README.md), SVGs, diagramas e glossário |
 | Arquitetura C4 | [Níveis 1 a 3 e link do diagrama disponibilizado pelo grupo](arquitetura/README.md); conferir acesso público e exportação final |

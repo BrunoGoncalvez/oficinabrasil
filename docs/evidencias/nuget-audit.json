@@ -7,19 +7,19 @@
   ],
   "projects": [
     {
-      "path": "PROJECT/OficinaBrasil.Domain/OficinaBrasil.Domain.csproj"
+      "path": "src/OficinaBrasil.Domain/OficinaBrasil.Domain.csproj"
     },
     {
-      "path": "PROJECT/OficinaBrasil.Application/OficinaBrasil.Application.csproj"
+      "path": "src/OficinaBrasil.Application/OficinaBrasil.Application.csproj"
     },
     {
-      "path": "PROJECT/OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj"
+      "path": "src/OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj"
     },
     {
-      "path": "PROJECT/OficinaBrasil.API/OficinaBrasil.API.csproj"
+      "path": "src/OficinaBrasil.API/OficinaBrasil.API.csproj"
     },
     {
-      "path": "PROJECT/OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj"
+      "path": "tests/OficinaBrasil.Domain.Tests/OficinaBrasil.Domain.Tests.csproj"
     }
   ]
 }

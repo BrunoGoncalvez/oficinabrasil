@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using MySqlConnector;
 using OficinaBrasil.API.Services;
 using OficinaBrasil.Infrastructure;
@@ -19,7 +20,7 @@ public class MySqlApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
     public string ConnectionString { get; private set; } = "";
     private readonly string database = "oficina_test_" + Guid.NewGuid().ToString("N");
 
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    protected override IHost CreateHost(IHostBuilder builder)
     {
         var source = Environment.GetEnvironmentVariable("OFICINA_TEST_MYSQL");
         if (string.IsNullOrWhiteSpace(source))
@@ -29,10 +30,13 @@ public class MySqlApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
                 .AddJsonFile(Path.Combine(root, "src", "OficinaBrasil.API", "appsettings.Development.json"), optional: true)
                 .Build().GetConnectionString("MySql");
         }
-        var connection = new MySqlConnectionStringBuilder(source ?? throw new InvalidOperationException("Configure OFICINA_TEST_MYSQL")) { Database = database };
+        if (string.IsNullOrWhiteSpace(source))
+            throw new InvalidOperationException("Configure OFICINA_TEST_MYSQL");
+        var connection = new MySqlConnectionStringBuilder(source) { Database = database };
         ConnectionString = connection.ConnectionString;
         builder.UseEnvironment("Development");
-        builder.ConfigureAppConfiguration((_, config) => config.AddInMemoryCollection(new Dictionary<string, string?>
+        // The minimal-host entry point reads these values before builder.Build().
+        builder.ConfigureHostConfiguration(config => config.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["ConnectionStrings:MySql"] = ConnectionString,
             ["SeedAdmin:Email"] = AdminEmail, ["SeedAdmin:Password"] = AdminPassword,
@@ -40,6 +44,12 @@ public class MySqlApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
             ["Estimates:PublicBaseUrl"] = "https://localhost",
             ["Logging:LogLevel:Default"] = "Warning"
         }));
+        return base.CreateHost(builder);
+    }
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.UseEnvironment("Development");
         builder.ConfigureServices(services =>
         {
             services.RemoveAll<DbContextOptions<WorkshopDbContext>>();

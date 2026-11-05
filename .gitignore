@@ -7,7 +7,7 @@ tmp/
 .artifacts/
 TestResults/
 
-# Configura??es privadas e credenciais locais
+# Configurações privadas e credenciais locais
 .env.*
 !.env.example
 **/appsettings.Local.json
@@ -17,3 +17,5 @@ TestResults/
 *.pem
 *.key
 **/keys/
+.sonarqube/
+.sonar/

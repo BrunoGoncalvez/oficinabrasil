@@ -34,7 +34,7 @@ Estes requisitos descrevem qualidades esperadas e restrições de implementaçã
 | RNF-05 | Expor API REST com documentação dos contratos | Acessar Swagger em Development e importar a coleção Postman |
 | RNF-06 | Disponibilizar testes unitários e de integração, com ao menos 80% de cobertura nos domínios críticos | Executar `scripts/verify.ps1` e consultar as [evidências](evidencias/cobertura.md); o projeto aplica a meta também aos quatro projetos de produção e ao total |
 | RNF-07 | Permitir execução local reproduzível com instruções, Dockerfile e Compose | Seguir o [README principal](../README.md#executar) e iniciar API e banco |
-| RNF-08 | Justificar a escolha do banco e disponibilizar resultado da análise de vulnerabilidades | Consultar o [ADR do MySQL](ADRs/ADR-001-banco-de-dados-mysql.md) e executar `scripts/security.ps1` para atualizar o [relatório](evidencias/seguranca.md) |
+| RNF-08 | Justificar a escolha do banco e disponibilizar resultado da análise de vulnerabilidades com Sonar | Consultar o [ADR do MySQL](ADRs/ADR-001-banco-de-dados-mysql.md), executar a [análise SonarQube](SONAR.md) e complementar com `scripts/security.ps1` para auditar dependências |
 
 Os critérios acima servem para validação, não declaram uma nova execução dos testes. Os relatórios registram as verificações já realizadas e devem corresponder ao commit final entregue.
 

@@ -1,0 +1,489 @@
+{
+    "total":  8,
+    "p":  1,
+    "ps":  500,
+    "paging":  {
+                   "pageIndex":  1,
+                   "pageSize":  500,
+                   "total":  8
+               },
+    "effortTotal":  75,
+    "issues":  [
+                   {
+                       "key":  "0080e07b-2e02-4864-b16f-8f08e73fe7cf",
+                       "rule":  "docker:S6471",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.API/Dockerfile",
+                       "project":  "oficinabrasil",
+                       "line":  10,
+                       "hash":  "0da53d8c3a436c83629af1819ebba3c6",
+                       "textRange":  {
+                                         "startLine":  10,
+                                         "endLine":  10,
+                                         "startOffset":  0,
+                                         "endOffset":  40
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "This image runs with \"root\" or \"containerAdministrator\" as the default user. Make sure it is safe here.",
+                       "effort":  "15min",
+                       "debt":  "15min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "dockerfile",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:52:19+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "COMPLETE",
+                       "cleanCodeAttributeCategory":  "INTENTIONAL",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "18bc6135-dae9-4a0b-902b-42446be119f4",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.API/Services/DemoSeeder.cs",
+                       "project":  "oficinabrasil",
+                       "line":  136,
+                       "hash":  "4fcb8bdd425e452507576fa615dff4b3",
+                       "textRange":  {
+                                         "startLine":  136,
+                                         "endLine":  136,
+                                         "startOffset":  24,
+                                         "endOffset":  76
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "e42eb108-2452-4c9c-96a0-32331afd6f5c",
+                       "rule":  "csharpsquid:S5332",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.API/Services/EstimateEmailWorker.cs",
+                       "project":  "oficinabrasil",
+                       "line":  28,
+                       "hash":  "284c66120407cc424a42e29fff2ae0ba",
+                       "textRange":  {
+                                         "startLine":  28,
+                                         "endLine":  32,
+                                         "startOffset":  43,
+                                         "endOffset":  25
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "EnableSsl should be set to true.",
+                       "effort":  "30min",
+                       "debt":  "30min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "cryptography",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "COMPLETE",
+                       "cleanCodeAttributeCategory":  "INTENTIONAL",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "84bbc11e-3701-42a9-b903-ede6acd162ce",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                       "project":  "oficinabrasil",
+                       "line":  8,
+                       "hash":  "8a57e3d4e07ec21e74d404c5ec721b33",
+                       "textRange":  {
+                                         "startLine":  8,
+                                         "endLine":  8,
+                                         "startOffset":  13,
+                                         "endOffset":  58
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "760d1941-fc6b-41a5-b1c8-6011101d75d3",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                       "project":  "oficinabrasil",
+                       "line":  10,
+                       "hash":  "42661bd1b7b47c43899f24d3d0ae208e",
+                       "textRange":  {
+                                         "startLine":  10,
+                                         "endLine":  10,
+                                         "startOffset":  16,
+                                         "endOffset":  56
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "a40dacfe-4f6d-49ff-a93f-3aa1c10fb26a",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                       "project":  "oficinabrasil",
+                       "line":  61,
+                       "hash":  "e1c3e76f2716b33b43773c0591fb8930",
+                       "textRange":  {
+                                         "startLine":  61,
+                                         "endLine":  61,
+                                         "startOffset":  13,
+                                         "endOffset":  61
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "e9a3ec8d-aea1-42bf-aa2d-fc17082b1b37",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                       "project":  "oficinabrasil",
+                       "line":  63,
+                       "hash":  "ce8c8449c35468c3a51be02349330bba",
+                       "textRange":  {
+                                         "startLine":  63,
+                                         "endLine":  63,
+                                         "startOffset":  16,
+                                         "endOffset":  80
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   },
+                   {
+                       "key":  "7ce3efb4-d197-463f-b050-9a6216e7f4f0",
+                       "rule":  "csharpsquid:S6444",
+                       "severity":  "MINOR",
+                       "component":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                       "project":  "oficinabrasil",
+                       "line":  64,
+                       "hash":  "a9a16737cb7cd047da4e5db64fe28bda",
+                       "textRange":  {
+                                         "startLine":  64,
+                                         "endLine":  64,
+                                         "startOffset":  13,
+                                         "endOffset":  65
+                                     },
+                       "flows":  [
+
+                                 ],
+                       "status":  "OPEN",
+                       "message":  "Pass a timeout to limit the execution time.",
+                       "effort":  "5min",
+                       "debt":  "5min",
+                       "author":  "brunosgoncalvez@gmail.com",
+                       "tags":  [
+                                    "cwe",
+                                    "regex",
+                                    "former-hotspot"
+                                ],
+                       "creationDate":  "2026-11-04T23:40:12+0000",
+                       "updateDate":  "2026-11-05T00:41:34+0000",
+                       "type":  "VULNERABILITY",
+                       "scope":  "MAIN",
+                       "quickFixAvailable":  false,
+                       "messageFormattings":  [
+
+                                              ],
+                       "codeVariants":  [
+
+                                        ],
+                       "cleanCodeAttribute":  "TRUSTWORTHY",
+                       "cleanCodeAttributeCategory":  "RESPONSIBLE",
+                       "impacts":  [
+                                       {
+                                           "softwareQuality":  "SECURITY",
+                                           "severity":  "LOW"
+                                       }
+                                   ],
+                       "issueStatus":  "OPEN",
+                       "prioritizedRule":  false,
+                       "fromSonarQubeUpdate":  false,
+                       "internalTags":  [
+
+                                        ],
+                       "linkedTicketStatus":  "NOT_LINKED"
+                   }
+               ],
+    "components":  [
+                       {
+                           "key":  "oficinabrasil:src/OficinaBrasil.API/Dockerfile",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "Dockerfile",
+                           "longName":  "src/OficinaBrasil.API/Dockerfile",
+                           "path":  "src/OficinaBrasil.API/Dockerfile"
+                       },
+                       {
+                           "key":  "oficinabrasil:src/OficinaBrasil.Domain/Validation/Checks.cs",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "Checks.cs",
+                           "longName":  "src/OficinaBrasil.Domain/Validation/Checks.cs",
+                           "path":  "src/OficinaBrasil.Domain/Validation/Checks.cs"
+                       },
+                       {
+                           "key":  "oficinabrasil:src/OficinaBrasil.API/Services/DemoSeeder.cs",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "DemoSeeder.cs",
+                           "longName":  "src/OficinaBrasil.API/Services/DemoSeeder.cs",
+                           "path":  "src/OficinaBrasil.API/Services/DemoSeeder.cs"
+                       },
+                       {
+                           "key":  "oficinabrasil",
+                           "enabled":  true,
+                           "qualifier":  "TRK",
+                           "name":  "OficinaBrasil",
+                           "longName":  "OficinaBrasil"
+                       },
+                       {
+                           "key":  "oficinabrasil:src/OficinaBrasil.API/Services/EstimateEmailWorker.cs",
+                           "enabled":  true,
+                           "qualifier":  "FIL",
+                           "name":  "EstimateEmailWorker.cs",
+                           "longName":  "src/OficinaBrasil.API/Services/EstimateEmailWorker.cs",
+                           "path":  "src/OficinaBrasil.API/Services/EstimateEmailWorker.cs"
+                       }
+                   ],
+    "facets":  [
+
+               ]
+}

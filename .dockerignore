@@ -16,3 +16,5 @@ docs/evidencias
 **/*.pem
 **/*.key
 **/keys
+.sonarqube
+.sonar

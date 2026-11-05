@@ -161,6 +161,7 @@ No Windows configurado para exigir scripts assinados, pode-se executar cada scri
 - [Cobertura medida](docs/evidencias/cobertura.md)
 - [Build local e Docker Linux](docs/evidencias/build.md)
 - [Análise de dependências](docs/evidencias/seguranca.md)
+- [Análise do código com SonarQube local](docs/SONAR.md)
 - [DDD, Event Storming, diagramas e glossário](docs/ddd/README.md)
 - [Conferência dos requisitos e entregáveis](docs/ENTREGA.md)
 

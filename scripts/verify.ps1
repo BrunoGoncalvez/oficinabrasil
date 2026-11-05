@@ -1,4 +1,4 @@
-param([double]$MinimumCoverage = 80)
+﻿param([double]$MinimumCoverage = 80)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Push-Location $projectRoot
@@ -13,7 +13,7 @@ try {
     New-Item -ItemType Directory -Path $evidence -Force | Out-Null
     Copy-Item -LiteralPath $report.FullName -Destination (Join-Path $evidence 'coverage.cobertura.xml')
     Copy-Item -LiteralPath (Join-Path $runDirectory 'resultados.trx') -Destination (Join-Path $evidence 'resultados.trx')
-    $lines = @('# Cobertura verificada', '', 'Todos os tipos dos quatro projetos de produção são medidos, incluindo DTOs, validações e seed; sem exclusões de classes. Domain e Application são os domínios críticos.', '', '| Projeto | Linhas | Ramos |', '|---|---:|---:|---:|')
+    $lines = @('# Cobertura verificada', '', 'Todos os tipos dos quatro projetos de produção são medidos, incluindo DTOs, validações e seed; sem exclusões de classes. Domain e Application são os domínios críticos.', '', '| Projeto | Linhas | Ramos |', '|---|---:|---:|')
     $failed = $false
     foreach ($name in @('OficinaBrasil.Domain', 'OficinaBrasil.Application', 'OficinaBrasil.Infrastructure', 'OficinaBrasil.API')) {
         $package = $coverage.coverage.packages.package | Where-Object { $_.name -eq $name }
