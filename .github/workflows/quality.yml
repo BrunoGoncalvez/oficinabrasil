@@ -37,3 +37,4 @@ jobs:
           path: |
             docs/evidencias/
             .artifacts/tests/
+            .artifacts/security/

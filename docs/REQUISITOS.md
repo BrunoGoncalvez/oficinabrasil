@@ -32,7 +32,7 @@ Estes requisitos descrevem qualidades esperadas e restrições de implementaçã
 | RNF-03 | Validar CPF/CNPJ e placa antes de persistir cadastros | Enviar valores válidos e inválidos e conferir os testes de validação |
 | RNF-04 | Garantir integridade transacional nos fluxos principais | Verificar que falhas não deixam alterações parciais de orçamento, decisão ou baixa de estoque; conferir testes de rollback e concorrência |
 | RNF-05 | Expor API REST com documentação dos contratos | Acessar Swagger em Development e importar a coleção Postman |
-| RNF-06 | Disponibilizar testes unitários e de integração, com ao menos 80% de cobertura nos domínios críticos | Executar `scripts/verify.ps1` e consultar as [evidências](evidencias/cobertura.md); o projeto aplica a meta também aos quatro projetos de produção e ao total |
+| RNF-06 | Disponibilizar testes unitários e de integração, com ao menos 80% de cobertura nos domínios críticos | Executar `scripts/verify.ps1` e consultar as [evidências](evidencias/sonar.md); o projeto aplica a meta também aos quatro projetos de produção e ao total |
 | RNF-07 | Permitir execução local reproduzível com instruções, Dockerfile e Compose | Seguir o [README principal](../README.md#executar) e iniciar API e banco |
 | RNF-08 | Justificar a escolha do banco e disponibilizar resultado da análise de vulnerabilidades com Sonar | Consultar o [ADR do MySQL](ADRs/ADR-001-banco-de-dados-mysql.md), executar a [análise SonarQube](SONAR.md) e complementar com `scripts/security.ps1` para auditar dependências |
 

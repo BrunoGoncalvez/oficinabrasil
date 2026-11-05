@@ -9,10 +9,7 @@ try {
     $report = Get-ChildItem -LiteralPath $runDirectory -Recurse -Filter coverage.cobertura.xml | Select-Object -First 1
     if (!$report) { throw 'Relatório de cobertura não encontrado.' }
     [xml]$coverage = Get-Content -LiteralPath $report.FullName
-    $evidence = Join-Path $projectRoot 'docs/evidencias'
-    New-Item -ItemType Directory -Path $evidence -Force | Out-Null
-    Copy-Item -LiteralPath $report.FullName -Destination (Join-Path $evidence 'coverage.cobertura.xml')
-    Copy-Item -LiteralPath (Join-Path $runDirectory 'resultados.trx') -Destination (Join-Path $evidence 'resultados.trx')
+    $evidence = $runDirectory
     $lines = @('# Cobertura verificada', '', 'Todos os tipos dos quatro projetos de produção são medidos, incluindo DTOs, validações e seed; sem exclusões de classes. Domain e Application são os domínios críticos.', '', '| Projeto | Linhas | Ramos |', '|---|---:|---:|')
     $failed = $false
     foreach ($name in @('OficinaBrasil.Domain', 'OficinaBrasil.Application', 'OficinaBrasil.Infrastructure', 'OficinaBrasil.API')) {

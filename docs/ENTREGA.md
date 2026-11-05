@@ -27,11 +27,11 @@ Confirmar se a lista de integrantes está completa. Repositório GitHub e vídeo
 | Estoque e transações | Concorrência EF no saldo e estado; testes de conflito e rollback |
 | JWT administrativo | AuthController; testes de 401/403 e papéis |
 | CPF/CNPJ e placa | Objetos de valor e Checks; testes de entradas válidas/inválidas |
-| Cobertura mínima dos domínios críticos | [Relatório](evidencias/cobertura.md) e XML bruto na mesma pasta |
+| Cobertura mínima dos domínios críticos | `scripts/verify.ps1` valida a meta por projeto; [resultado SonarQube](evidencias/sonar.md) registra a cobertura da análise |
 | Testes de integração | ApiIntegrationTests: HTTP + JWT + EF + MySQL real; SMTP local capturado |
-| Vulnerabilidades de dependências | [Relatório](evidencias/seguranca.md) e JSON bruto |
-| Análise do código com SonarQube | [Resultado e JSONs](evidencias/sonar.md), [avaliação dos achados](evidencias/sonar-achados.md) e [reprodução local](SONAR.md) |
-| Docker e execução local | Dockerfile, compose, [README](../README.md) e [build Linux verificado](evidencias/build.md) |
+| Vulnerabilidades de dependências | `scripts/security.ps1`; resultados locais em `.artifacts/security/` |
+| Análise do código com SonarQube | [Resultado da análise](evidencias/sonar.md), com métricas, cobertura e achados; [reprodução local](SONAR.md) |
+| Docker e execução local | Dockerfile, compose e [instruções de execução](../README.md) |
 | DDD e exportações locais | [Documentação](ddd/README.md), SVGs, diagramas e glossário |
 | Arquitetura C4 | [Níveis 1 a 3 e link do diagrama disponibilizado pelo grupo](arquitetura/README.md); conferir acesso público e exportação final |
 

@@ -22,7 +22,7 @@ Este é o README principal do projeto. Os guias específicos ficam em `docs`.
 | Postman | [Importar coleção](docs/postman/OficinaBrasil.postman_collection.json) · [Como utilizar](docs/postman/README.md) |
 | Guia de atendimento | [Fluxo de atendimento em PDF](docs/guias/OficinaBrasil-Fluxo-Atendimento.pdf) |
 | Dados de demonstração | [Preparar e explorar os cenários](docs/DEMO.md) |
-| Qualidade | [Cobertura](docs/evidencias/cobertura.md) · [Dependências](docs/evidencias/seguranca.md) · [Build](docs/evidencias/build.md) |
+| Qualidade e segurança | [Resultado da análise SonarQube](docs/evidencias/sonar.md) |
 
 ## Funcionalidades
 
@@ -154,13 +154,11 @@ Se a variável não for definida, os testes usam os parâmetros de conexão loca
 
 No Windows configurado para exigir scripts assinados, pode-se executar cada script revisado com uma exceção apenas naquele processo: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1` (ou `scripts/security.ps1`). Isso não altera a política persistente da máquina.
 
-`verify.ps1` executa a suíte e exige **80% de cobertura de linhas em cada um dos quatro projetos de produção e no total**, considerando todos os tipos, inclusive DTOs e seed. Assim, Domain e Application (domínios críticos) também são avaliados individualmente. Gera XML Cobertura, TRX e resumo em [docs/evidencias](docs/evidencias/). Os testes verificam transições, cadastro, documentos, preços, aprovação/reprovação, token, reemissão, JWT/papéis, rollback, concorrência de saldo, entrega SMTP e idempotência da seed. Transações usam `SaveChanges`; saldo, status e decisão têm controle otimista de concorrência. Conflitos retornam 409.
+`verify.ps1` executa a suíte e exige **80% de cobertura de linhas em cada um dos quatro projetos de produção e no total**, considerando todos os tipos, inclusive DTOs e seed. Assim, Domain e Application (domínios críticos) também são avaliados individualmente. Gera XML Cobertura, TRX e resumo em `.artifacts/tests/`, fora do versionamento. Os testes verificam transições, cadastro, documentos, preços, aprovação/reprovação, token, reemissão, JWT/papéis, rollback, concorrência de saldo, entrega SMTP e idempotência da seed. Transações usam `SaveChanges`; saldo, status e decisão têm controle otimista de concorrência. Conflitos retornam 409.
 
 `security.ps1` consulta alertas NuGet diretos/transitivos e falha se houver avisos. O relatório delimita o escopo da análise; não é uma declaração de ausência de qualquer vulnerabilidade. A pipeline em `.github/workflows/quality.yml` repete build, testes, cobertura e auditoria com MySQL 8 e publica evidências.
 
-- [Cobertura medida](docs/evidencias/cobertura.md)
-- [Build local e Docker Linux](docs/evidencias/build.md)
-- [Análise de dependências](docs/evidencias/seguranca.md)
+- [Resultado da análise SonarQube: segurança, testes e cobertura](docs/evidencias/sonar.md)
 - [Análise do código com SonarQube local](docs/SONAR.md)
 - [DDD, Event Storming, diagramas e glossário](docs/ddd/README.md)
 - [Conferência dos requisitos e entregáveis](docs/ENTREGA.md)

@@ -58,28 +58,83 @@ try {
     $workingTreeChanged = [bool](& git status --porcelain)
     $evidence = Join-Path $projectRoot 'docs/evidencias'
     New-Item -ItemType Directory -Path $evidence -Force | Out-Null
+    $rawEvidence = Join-Path $projectRoot '.artifacts/sonar-export'
+    New-Item -ItemType Directory -Path $rawEvidence -Force | Out-Null
     foreach ($entry in @{
         'sonar-qualitygate.json' = $gate; 'sonar-metrics.json' = $metrics
         'sonar-vulnerabilities.json' = $vulnerabilities; 'sonar-hotspots.json' = $hotspots
         'sonar-security-issues.json' = $securityIssues
     }.GetEnumerator()) {
-        [IO.File]::WriteAllText((Join-Path $evidence $entry.Key), ($entry.Value | ConvertTo-Json -Depth 50), [Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllText((Join-Path $rawEvidence $entry.Key), ($entry.Value | ConvertTo-Json -Depth 50), [Text.UTF8Encoding]::new($false))
     }
     $summary = @('# Análise SonarQube', '', "Execução: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz').", '',
         "SonarQube: $version. Projeto: ``$ProjectKey``. Análise: ``$($task.task.analysisId)``.", '',
         "Commit base: ``$commit``. Alterações locais presentes na execução: $workingTreeChanged. A análise considera os arquivos de trabalho.", '',
         "Quality Gate: **$($gate.projectStatus.status)**.", '', '| Métrica | Valor |', '|---|---:|')
-    foreach ($measure in $metrics.component.measures | Sort-Object metric) { $summary += "| $($measure.metric) | $($measure.value) |" }
+    $metricLabels = @{
+        bugs = 'Defeitos (classificação legada)'
+        code_smells = 'Problemas de qualidade do código (classificação legada)'
+        coverage = 'Cobertura de testes'
+        duplicated_lines_density = 'Percentual de linhas duplicadas'
+        ncloc = 'Linhas de código sem comentários'
+        security_hotspots = 'Pontos de atenção de segurança'
+        security_hotspots_reviewed = 'Pontos de atenção de segurança revisados'
+        skipped_tests = 'Testes ignorados'
+        software_quality_maintainability_issues = 'Problemas de manutenibilidade (MQR)'
+        software_quality_reliability_issues = 'Problemas de confiabilidade (MQR)'
+        software_quality_security_issues = 'Problemas de segurança (MQR)'
+        test_errors = 'Erros nos testes'
+        test_failures = 'Falhas nos testes'
+        tests = 'Testes executados'
+        vulnerabilities = 'Vulnerabilidades (classificação legada)'
+        new_coverage = 'Cobertura do código novo'
+        new_duplicated_lines_density = 'Percentual de linhas duplicadas no código novo'
+        new_security_hotspots_reviewed = 'Pontos de atenção de segurança revisados no código novo'
+        new_software_quality_security_rating = 'Classificação de segurança do código novo'
+        new_software_quality_reliability_rating = 'Classificação de confiabilidade do código novo'
+        new_software_quality_maintainability_rating = 'Classificação de manutenibilidade do código novo'
+        new_violations = 'Novos problemas'
+    }
+    foreach ($measure in $metrics.component.measures | Sort-Object metric) {
+        $label = $metricLabels[$measure.metric]
+        if (!$label) { $label = $measure.metric }
+        $value = $measure.value.Replace('.', ',')
+        if ($measure.metric -in @('coverage', 'duplicated_lines_density', 'security_hotspots_reviewed')) { $value += '%' }
+        $summary += "| $label | $value |"
+    }
     $summary += @('', '## Condições do Quality Gate', '')
     if (@($gate.projectStatus.conditions).Count -eq 0) {
         $summary += 'Esta análise não apresentou condições avaliadas no Quality Gate. O status OK não significa ausência de achados de segurança; consulte as métricas e as listas de problemas.'
     } else {
         $summary += @('| Métrica | Resultado | Valor | Limite |', '|---|---|---:|---:|')
-        foreach ($condition in $gate.projectStatus.conditions) { $summary += "| $($condition.metricKey) | $($condition.status) | $($condition.actualValue) | $($condition.errorThreshold) |" }
+        foreach ($condition in $gate.projectStatus.conditions) {
+            $label = $metricLabels[$condition.metricKey]
+            if (!$label) { $label = $condition.metricKey }
+            $status = switch ($condition.status) { 'OK' { 'Aprovado' }; 'ERROR' { 'Reprovado' }; default { $condition.status } }
+            $summary += "| $label | $status | $($condition.actualValue) | $($condition.errorThreshold) |"
+        }
     }
-    $summary += @('', 'Evidências: [métricas](sonar-metrics.json), [Quality Gate](sonar-qualitygate.json), [vulnerabilidades abertas na classificação legada](sonar-vulnerabilities.json), [problemas com impacto em segurança no modo MQR](sonar-security-issues.json) e [Security Hotspots](sonar-hotspots.json). As consultas de achados incluem até 500 itens; confira o total e a paginação dos JSONs.', '',
+    $summary += @('', '## Apontamentos de segurança', '')
+    $ruleDescriptions = @{
+        'csharpsquid:S6444' = 'Expressão regular sem timeout explícito; definir limite de execução e tratar entradas inválidas.'
+        'csharpsquid:S5332' = 'TLS do SMTP pode ser desabilitado por configuração; exigir TLS em produção.'
+        'docker:S6471' = 'Imagem executada como root; configurar usuário sem privilégios e permissões do volume de chaves.'
+    }
+    if (@($securityIssues.issues).Count -eq 0) {
+        $summary += 'Nenhum problema de segurança aberto foi retornado nesta consulta.'
+    } else {
+        $summary += @('| Regra | Local | Ocorrências | Descrição |', '|---|---|---:|---|')
+        foreach ($group in $securityIssues.issues | Group-Object rule, component) {
+            $issue = $group.Group[0]
+            $path = $issue.component.Substring($ProjectKey.Length + 1)
+            $description = $ruleDescriptions[$issue.rule]
+            if (!$description) { $description = $issue.message.Replace('|', '\|') }
+            $summary += "| $($issue.rule) | [$path](../../$path) | $($group.Count) | $description |"
+        }
+    }
+    $summary += @('', 'Os achados acima permanecem abertos conforme o resultado da análise. A consulta inclui até 500 itens; os dados brutos e a paginação ficam em `.artifacts/sonar-export/`, fora do versionamento.', '',
         'Security Hotspots exigem revisão contextual; não são automaticamente vulnerabilidades confirmadas. O resultado descreve as regras disponíveis nesta edição do SonarQube e não substitui a auditoria de dependências.', '',
-        'Reprodução: consulte [Análise com SonarQube](../SONAR.md). A cobertura desta execução vem dos testes completos com MySQL e SMTP local.', '',
+        'Reprodução: consulte [Análise com SonarQube](../SONAR.md). A cobertura desta execução foi importada do Coverlet em formato OpenCover, junto aos resultados TRX dos testes completos com MySQL e SMTP local. A métrica de cobertura do Sonar combina linhas e condições.', '',
         "[Painel local]($HostUrl/dashboard?id=$key). O endereço localhost é acessível somente no computador que executa o SonarQube.")
     [IO.File]::WriteAllLines((Join-Path $evidence 'sonar.md'), $summary, [Text.UTF8Encoding]::new($false))
     if ($scanExitCode -ne 0 -or $gate.projectStatus.status -ne 'OK') { throw 'Análise enviada, mas houve falha no scanner ou no Quality Gate. Evidências salvas em docs/evidencias/sonar.md.' }

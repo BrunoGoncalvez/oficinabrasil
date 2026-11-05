@@ -34,7 +34,7 @@ try {
 
 O script instala o scanner 12.0.0 em `.artifacts/tools`, inicia a análise, recompila a solução, executa todos os testes com MySQL real e gera cobertura OpenCover. Por fim, envia o resultado e aguarda o Quality Gate. A execução falha se o build, os testes, o envio ou o Quality Gate falharem.
 
-Depois do processamento, o script salva `sonar.md` e os JSONs de métricas, Quality Gate, vulnerabilidades e hotspots em `docs/evidencias/`, inclusive quando o Quality Gate reprova a análise.
+Depois do processamento, o script publica somente `docs/evidencias/sonar.md`, reunindo as métricas, a cobertura, o Quality Gate e os apontamentos de segurança, inclusive quando o Quality Gate reprova a análise. Os JSONs técnicos ficam em `.artifacts/sonar-export/`, ignorado pelo Git.
 
 Os bancos de testes usam nomes `oficina_test_<GUID>` e são removidos ao final da suíte. Os arquivos intermediários ficam em `.artifacts/` e `.sonarqube/`, excluídos do Git e do contexto de build do Docker. Não publique tokens, credenciais locais ou o diretório interno do scanner.
 
@@ -42,9 +42,9 @@ Os bancos de testes usam nomes `oficina_test_<GUID>` e são removidos ao final d
 
 No painel `http://localhost:9000/dashboard?id=oficinabrasil`, confira o Quality Gate, os problemas de segurança, os Security Hotspots e a cobertura. Um hotspot exige revisão e não equivale automaticamente a uma vulnerabilidade confirmada.
 
-O [resultado da execução](evidencias/sonar.md) registra as métricas e os JSONs exportados. A [avaliação dos achados](evidencias/sonar-achados.md) apresenta o contexto e as correções recomendadas para os problemas identificados. O status do Quality Gate deve ser lido junto com as condições efetivamente avaliadas e com a lista de problemas.
+O [resultado da análise](evidencias/sonar.md) reúne as métricas, os testes, a cobertura e a avaliação dos achados em um único documento. O status do Quality Gate deve ser lido junto com as condições efetivamente avaliadas e com a lista de problemas.
 
-Registre a versão analisada, a data, as métricas, os achados e as decisões de revisão. Inclua capturas do painel e dos problemas relevantes em `docs/evidencias/`. Uma instalação local não é acessível aos professores pelo endereço localhost; as evidências devem acompanhar o repositório.
+O relatório registra a versão analisada, a data, as métricas e os achados. Uma instalação local não é acessível aos professores pelo endereço localhost; o documento permite consultar o resultado no repositório.
 
 Para encerrar o SonarQube preservando os dados:
 

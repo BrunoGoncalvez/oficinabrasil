@@ -73,4 +73,4 @@ Reavaliar a decisão se houver requisito de infraestrutura que imponha outro ban
 - [Dependências de persistência](../../src/OficinaBrasil.Infrastructure/OficinaBrasil.Infrastructure.csproj).
 - [Ambiente Docker e volume do banco](../../docker-compose.yml).
 - [SQL para bancos existentes](../../database/001_estimates.sql).
-- [Testes e evidências de cobertura](../evidencias/cobertura.md).
+- [Testes e evidências de cobertura](../evidencias/sonar.md).
