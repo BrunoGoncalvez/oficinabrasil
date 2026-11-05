@@ -2,7 +2,7 @@
 
 **Diagrama disponibilizado pelo grupo:** [acessar C4 no Google Drive](https://drive.google.com/file/d/1H27tvh5jXve668DbhFRELxEavZPblo2P/view?usp=sharing).
 
-**Arquivo completo no repositório:** [abrir ou baixar OficinaBrasil-C4.drawio](OficinaBrasil-C4.drawio). Esta é a versão fornecida pelo grupo, com as três abas verificadas no arquivo: **C4 - Context**, **C4 - Container** e **C4 - Components**. Ela substitui o desenho inicial usado como referência.
+**Arquivo completo no repositório:** [abrir ou baixar OficinaBrasil-C4.drawio](OficinaBrasil-C4.drawio), com as abas **C4 - Context**, **C4 - Container** e **C4 - Components**.
 
 A prévia do Google Drive pode mostrar apenas uma página. Para consultar todas as abas, baixe o arquivo completo e abra-o no draw.io. As permissões do link externo ainda precisam ser conferidas sem login.
 
@@ -42,7 +42,7 @@ Não apresente banco, controllers ou frameworks nesta página. Ela explica o sis
 
 Cada relação deve ter um conector independente e sua própria descrição. O serviço SMTP é externo ao OficinaBrasil; o worker que solicita o envio pertence à API e aparece no nível 3.
 
-Os três níveis estão disponíveis no arquivo completo fornecido pelo grupo, vinculado no início desta página. As tabelas servem como apoio à leitura dos diagramas.
+Os três níveis estão disponíveis no arquivo vinculado no início desta página. As tabelas servem como apoio à leitura dos diagramas.
 
 ## Nível 2 — Contêineres
 

@@ -36,7 +36,7 @@ Estes requisitos descrevem qualidades esperadas e restrições de implementaçã
 | RNF-07 | Permitir execução local reproduzível com instruções, Dockerfile e Compose | Seguir o [README principal](../README.md#executar) e iniciar API e banco |
 | RNF-08 | Justificar a escolha do banco e disponibilizar resultado da análise de vulnerabilidades com Sonar | Consultar o [ADR do MySQL](ADRs/ADR-001-banco-de-dados-mysql.md), executar a [análise SonarQube](SONAR.md) e complementar com `scripts/security.ps1` para auditar dependências |
 
-Os critérios acima servem para validação, não declaram uma nova execução dos testes. Os relatórios registram as verificações já realizadas e devem corresponder ao commit final entregue.
+Os resultados das verificações estão nos relatórios de testes, cobertura e segurança.
 
 ## Limites do MVP
 
@@ -45,9 +45,7 @@ Os critérios acima servem para validação, não declaram uma nova execução d
 - Reserva de peças, fornecedores, pendência formal por falta de peças e notificações ao mecânico pertencem ao levantamento de negócio; o MVP usa saldo e movimentações e bloqueia a execução sem estoque suficiente.
 - Não foram estabelecidas metas numéricas de latência, usuários simultâneos ou disponibilidade. Os exemplos da aula não são exigências específicas deste desafio.
 
-## Referências e entrega
+## Referências
 
-- **Fase 1 — Tech Challenge**, fornecido pelo grupo: funcionalidades nas páginas 3–4 e 9–10; requisitos técnicos nas páginas 4 e 10–11; entregáveis nas páginas 4–9.
-- **14SOAT — Fase 1 — Arquiteturas de software — Aula 3**, fornecido pelo grupo: conceitos de requisitos funcionais e não funcionais e critérios de verificação nas páginas 5–6 e 10–12.
-
-Os PDFs de aula não foram copiados para o repositório. A documentação de [DDD](ddd/README.md), os [ADRs](ADRs/README.md) e o [checklist de entrega](ENTREGA.md) complementam esta página. Vídeo, PDF único de submissão, identificação do grupo, acesso aos links e proteção da branch são providências de entrega, não funcionalidades da API.
+- **Fase 1 — Tech Challenge**: funcionalidades nas páginas 3–4 e 9–10; requisitos técnicos nas páginas 4 e 10–11; entregáveis nas páginas 4–9.
+- **14SOAT — Fase 1 — Arquiteturas de software — Aula 3**: conceitos de requisitos funcionais e não funcionais e critérios de verificação nas páginas 5–6 e 10–12.

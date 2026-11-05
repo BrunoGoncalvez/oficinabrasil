@@ -2,8 +2,6 @@
 
 Os três diagramas descrevem o atendimento da oficina pela perspectiva dos atores e de suas atividades. A numeração nas conexões indica a sequência de leitura de cada história.
 
-Foram mantidos os arquivos SVG originais, com nomes padronizados. As exportações PNG dos fluxos mecânico e de estoque representam as mesmas histórias e não foram adicionadas como documentos separados. Os arquivos de origem permanecem preservados fora do repositório.
-
 ## 1. Atendimento e orçamento
 
 [Abrir o diagrama de atendimento](01-atendimento.svg).
@@ -45,7 +43,5 @@ Esse diagrama descreve o processo de negócio descoberto. A implementação atua
 ## Relação com os demais documentos
 
 O Domain Storytelling apresenta quem realiza as atividades e quais objetos participam. O [Event Storming](../README.md#event-storming) complementa essas histórias com comandos, eventos, políticas e estados. Os termos do domínio estão no [glossário de linguagem ubíqua](../linguagem-ubiqua.md).
-
-As imagens foram preservadas como recebidas, incluindo o título genérico `<title>` no fluxo mecânico e o ator adicional sem conexões no fluxo de estoque. Os títulos e descrições desta página identificam cada história.
 
 Retornar à [documentação DDD](../README.md) ou ao [README principal](../../../README.md).

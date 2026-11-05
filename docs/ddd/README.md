@@ -12,7 +12,7 @@ Os [diagramas originais de Domain Storytelling](storytelling/README.md) apresent
 - [Fluxo do mecânico](storytelling/02-fluxo-mecanico.svg): consulta da OS aprovada, solicitação de peças, execução e finalização.
 - [Estoque](storytelling/03-estoque.svg): consulta, disponibilidade, reserva, entrega e saída de peças.
 
-A página de Storytelling explica a relação entre as histórias e o código, incluindo as atividades de reserva e entrega física de peças que não possuem operação própria na aplicação. Foi incluída uma versão SVG por história, sem repetir as exportações PNG.
+A página de Storytelling relaciona as histórias às operações da aplicação e apresenta as atividades de reserva e entrega física de peças previstas no processo de negócio.
 
 ## Event Storming
 

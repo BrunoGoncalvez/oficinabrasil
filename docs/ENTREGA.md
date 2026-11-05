@@ -42,7 +42,7 @@ Confirmar se a lista de integrantes está completa. Repositório GitHub e vídeo
 - Identificar a versão final por branch e hash/tag; repetir os scripts de testes e auditoria nessa versão.
 - Garantir que os arquivos de evidência e DDD estão no commit entregue, sem credenciais reais ou arquivos temporários.
 - Validar o acesso ao Miro sem solicitação manual de permissão; a documentação local serve como cópia versionada da solução implementada.
-- Validar o acesso ao C4 no Google Drive sem login. O [arquivo completo fornecido pelo grupo](arquitetura/OficinaBrasil-C4.drawio), com três abas, já está no repositório; para leitura sem editor, disponibilizar também PDF exportado com todas as páginas.
+- Validar o acesso ao C4 no Google Drive sem login e disponibilizar uma exportação em PDF das três abas do [arquivo C4](arquitetura/OficinaBrasil-C4.drawio).
 - Gravar e publicar vídeo público no YouTube, de até 15 minutos, demonstrando a mesma versão do código.
 - Acrescentar ao README os links definitivos do repositório e do vídeo.
 - Montar o PDF único com identificação, tecnologias, repositório, branch/hash, vídeo, DDD e links para as evidências. Conferir todos os links em sessão não autenticada.
